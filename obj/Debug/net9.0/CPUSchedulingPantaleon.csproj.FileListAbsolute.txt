@@ -1,0 +1,56 @@
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\CPUSchedulingPantaleon\CPUSchedulingPantaleon\bin\Debug\net9.0\CPUSchedulingPantaleon.exe
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\CPUSchedulingPantaleon\CPUSchedulingPantaleon\bin\Debug\net9.0\CPUSchedulingPantaleon.deps.json
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\CPUSchedulingPantaleon\CPUSchedulingPantaleon\bin\Debug\net9.0\CPUSchedulingPantaleon.runtimeconfig.json
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\CPUSchedulingPantaleon\CPUSchedulingPantaleon\bin\Debug\net9.0\CPUSchedulingPantaleon.dll
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\CPUSchedulingPantaleon\CPUSchedulingPantaleon\bin\Debug\net9.0\CPUSchedulingPantaleon.pdb
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.AssemblyInfoInputs.cache
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.AssemblyInfo.cs
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.csproj.CoreCompileInputs.cache
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.dll
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\refint\CPUSchedulingPantaleon.dll
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.pdb
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.genruntimeconfig.cache
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\ref\CPUSchedulingPantaleon.dll
+E:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\bin\Debug\net9.0\CPUSchedulingPantaleon.exe
+E:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\bin\Debug\net9.0\CPUSchedulingPantaleon.deps.json
+E:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\bin\Debug\net9.0\CPUSchedulingPantaleon.runtimeconfig.json
+E:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\bin\Debug\net9.0\CPUSchedulingPantaleon.dll
+E:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\bin\Debug\net9.0\CPUSchedulingPantaleon.pdb
+E:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.GeneratedMSBuildEditorConfig.editorconfig
+E:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.AssemblyInfoInputs.cache
+E:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.AssemblyInfo.cs
+E:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.csproj.CoreCompileInputs.cache
+E:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.dll
+E:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\refint\CPUSchedulingPantaleon.dll
+E:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.pdb
+E:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.genruntimeconfig.cache
+E:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\ref\CPUSchedulingPantaleon.dll
+D:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\bin\Debug\net9.0\CPUSchedulingPantaleon.exe
+D:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\bin\Debug\net9.0\CPUSchedulingPantaleon.deps.json
+D:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\bin\Debug\net9.0\CPUSchedulingPantaleon.runtimeconfig.json
+D:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\bin\Debug\net9.0\CPUSchedulingPantaleon.dll
+D:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\bin\Debug\net9.0\CPUSchedulingPantaleon.pdb
+D:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.GeneratedMSBuildEditorConfig.editorconfig
+D:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.AssemblyInfoInputs.cache
+D:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.AssemblyInfo.cs
+D:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.csproj.CoreCompileInputs.cache
+D:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.dll
+D:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\refint\CPUSchedulingPantaleon.dll
+D:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.pdb
+D:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.genruntimeconfig.cache
+D:\CPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\ref\CPUSchedulingPantaleon.dll
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\srtfCPUSchedulingPantaleon\CPUSchedulingPantaleon\bin\Debug\net9.0\CPUSchedulingPantaleon.exe
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\srtfCPUSchedulingPantaleon\CPUSchedulingPantaleon\bin\Debug\net9.0\CPUSchedulingPantaleon.deps.json
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\srtfCPUSchedulingPantaleon\CPUSchedulingPantaleon\bin\Debug\net9.0\CPUSchedulingPantaleon.runtimeconfig.json
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\srtfCPUSchedulingPantaleon\CPUSchedulingPantaleon\bin\Debug\net9.0\CPUSchedulingPantaleon.dll
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\srtfCPUSchedulingPantaleon\CPUSchedulingPantaleon\bin\Debug\net9.0\CPUSchedulingPantaleon.pdb
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\srtfCPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\srtfCPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.AssemblyInfoInputs.cache
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\srtfCPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.AssemblyInfo.cs
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\srtfCPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.csproj.CoreCompileInputs.cache
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\srtfCPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.dll
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\srtfCPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\refint\CPUSchedulingPantaleon.dll
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\srtfCPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.pdb
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\srtfCPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\CPUSchedulingPantaleon.genruntimeconfig.cache
+C:\Users\Kurt Pantaleon\Documents\Visual Studio Code\srtfCPUSchedulingPantaleon\CPUSchedulingPantaleon\obj\Debug\net9.0\ref\CPUSchedulingPantaleon.dll
