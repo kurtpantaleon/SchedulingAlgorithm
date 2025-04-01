@@ -23,7 +23,7 @@ class Program
         Console.WriteLine("\nEnter Burst Times: ");
         List<int> burstTimes = LimitedIntegerInput(n);
 
-        Console.WriteLine("\nEnter Priorities: ");
+        Console.WriteLine("\nEnter Priorities (Lower number = Higher priority): ");
         List<int> priorities = LimitedIntegerInput(n);
 
         Console.WriteLine("\nEnter Quantum Time for Round Robin: ");
@@ -49,9 +49,10 @@ class Program
 
         EvaluateAlgorithm("First Come First Serve (FCFS)", processes, scheduler => scheduler.FCFS(), results);
         EvaluateAlgorithm("Shortest Job First (SJF)", processes, scheduler => scheduler.SJF(), results);
-        EvaluateAlgorithm("Priority Scheduling", processes, scheduler => scheduler.PriorityScheduling(), results);
+        EvaluateAlgorithm("Priority Scheduling (Non-Preemptive)", processes, scheduler => scheduler.PriorityScheduling(), results);
         EvaluateAlgorithm("Shortest Remaining Time First (SRTF)", processes, scheduler => scheduler.SRTF(), results);
         EvaluateAlgorithm($"Round Robin (Quantum = {quantumTime})", processes, scheduler => scheduler.RoundRobin(quantumTime), results);
+        EvaluateAlgorithm("Priority Preemptive Scheduling", processes, scheduler => scheduler.PriorityPreemptive(), results);
 
         double minShowTimes = results.Min(r => r.Value.ShowTimes);
         var bestAlgorithms = results.Where(r => r.Value.ShowTimes == minShowTimes).ToList();
@@ -64,7 +65,6 @@ class Program
             display.ShowTimes(algo.Value.Processes.OrderBy(p => p.Id).ToList());
         }
     }
-
     static void EvaluateAlgorithm(string name, List<Process> processes,
         Action<ProcessScheduler> action,
         Dictionary<string, (List<Process>, List<int>, List<int>, double)> results)
@@ -157,91 +157,78 @@ public class ProcessScheduler
         this.ganttChart = new List<int>();
         this.timeSlices = new List<int>();
     }
-
     public void FCFS()
     {
-        var sortedProcesses = processes.OrderBy(p => p.ArrivalTime).ToList();
-        int currentTime = 0;
         ganttChart.Clear();
         timeSlices.Clear();
+        int currentTime = 0;
+        var sorted = processes.OrderBy(p => p.ArrivalTime).ToList();
 
-        foreach (var process in sortedProcesses)
+        foreach (var p in sorted)
         {
-            if (currentTime < process.ArrivalTime)
-                currentTime = process.ArrivalTime;
+            if (currentTime < p.ArrivalTime)
+                currentTime = p.ArrivalTime;
 
-            process.WaitingTime = currentTime - process.ArrivalTime;
-            process.CompletionTime = currentTime + process.BurstTime;
-            process.TurnaroundTime = process.CompletionTime - process.ArrivalTime;
-            currentTime += process.BurstTime;
-            ganttChart.Add(process.Id);
-            timeSlices.Add(process.BurstTime);
+            p.WaitingTime = currentTime - p.ArrivalTime;
+            p.CompletionTime = currentTime + p.BurstTime;
+            p.TurnaroundTime = p.CompletionTime - p.ArrivalTime;
+            currentTime += p.BurstTime;
+            ganttChart.Add(p.Id);
+            timeSlices.Add(p.BurstTime);
         }
     }
 
     public void SJF()
     {
-        int currentTime = 0;
         ganttChart.Clear();
         timeSlices.Clear();
-        var remainingProcesses = new List<Process>(processes);
+        int currentTime = 0;
+        var remaining = new List<Process>(processes);
 
-        while (remainingProcesses.Count > 0)
+        while (remaining.Count > 0)
         {
-            var availableProcesses = remainingProcesses
-                .Where(p => p.ArrivalTime <= currentTime)
-                .OrderBy(p => p.BurstTime)
-                .ThenBy(p => p.ArrivalTime)
-                .ToList();
-
-            if (availableProcesses.Count == 0)
+            var available = remaining.Where(p => p.ArrivalTime <= currentTime).OrderBy(p => p.BurstTime).ThenBy(p => p.ArrivalTime).ToList();
+            if (available.Count == 0)
             {
-                int nextArrival = remainingProcesses.Min(p => p.ArrivalTime);
-                currentTime = nextArrival;
+                currentTime++;
                 continue;
             }
 
-            var selectedProcess = availableProcesses[0];
-            selectedProcess.WaitingTime = currentTime - selectedProcess.ArrivalTime;
-            selectedProcess.CompletionTime = currentTime + selectedProcess.BurstTime;
-            selectedProcess.TurnaroundTime = selectedProcess.CompletionTime - selectedProcess.ArrivalTime;
-            currentTime += selectedProcess.BurstTime;
-            ganttChart.Add(selectedProcess.Id);
-            timeSlices.Add(selectedProcess.BurstTime);
-            remainingProcesses.Remove(selectedProcess);
+            var p = available[0];
+            p.WaitingTime = currentTime - p.ArrivalTime;
+            p.CompletionTime = currentTime + p.BurstTime;
+            p.TurnaroundTime = p.CompletionTime - p.ArrivalTime;
+            currentTime += p.BurstTime;
+            ganttChart.Add(p.Id);
+            timeSlices.Add(p.BurstTime);
+            remaining.Remove(p);
         }
     }
 
     public void PriorityScheduling()
     {
-        int currentTime = 0;
         ganttChart.Clear();
         timeSlices.Clear();
-        var remainingProcesses = new List<Process>(processes);
+        int currentTime = 0;
+        var remaining = new List<Process>(processes);
 
-        while (remainingProcesses.Count > 0)
+        while (remaining.Count > 0)
         {
-            var availableProcesses = remainingProcesses
-                .Where(p => p.ArrivalTime <= currentTime)
-                .OrderBy(p => p.Priority)
-                .ThenBy(p => p.ArrivalTime)
-                .ToList();
-
-            if (availableProcesses.Count == 0)
+            var available = remaining.Where(p => p.ArrivalTime <= currentTime).OrderBy(p => p.Priority).ThenBy(p => p.ArrivalTime).ToList();
+            if (available.Count == 0)
             {
-                int nextArrival = remainingProcesses.Min(p => p.ArrivalTime);
-                currentTime = nextArrival;
+                currentTime++;
                 continue;
             }
 
-            var selectedProcess = availableProcesses[0];
-            selectedProcess.WaitingTime = currentTime - selectedProcess.ArrivalTime;
-            selectedProcess.CompletionTime = currentTime + selectedProcess.BurstTime;
-            selectedProcess.TurnaroundTime = selectedProcess.CompletionTime - selectedProcess.ArrivalTime;
-            currentTime += selectedProcess.BurstTime;
-            ganttChart.Add(selectedProcess.Id);
-            timeSlices.Add(selectedProcess.BurstTime);
-            remainingProcesses.Remove(selectedProcess);
+            var p = available[0];
+            p.WaitingTime = currentTime - p.ArrivalTime;
+            p.CompletionTime = currentTime + p.BurstTime;
+            p.TurnaroundTime = p.CompletionTime - p.ArrivalTime;
+            currentTime += p.BurstTime;
+            ganttChart.Add(p.Id);
+            timeSlices.Add(p.BurstTime);
+            remaining.Remove(p);
         }
     }
 
@@ -249,68 +236,54 @@ public class ProcessScheduler
     {
         ganttChart.Clear();
         timeSlices.Clear();
-
-        foreach (var process in processes)
+        foreach (var p in processes)
         {
-            process.RemainingTime = process.BurstTime;
-            process.CompletionTime = 0;
+            p.RemainingTime = p.BurstTime;
+            p.CompletionTime = 0;
         }
 
         int currentTime = 0;
         int lastProcessId = -1;
-        int currentTimeSlice = 0;
+        int timeSlice = 0;
+        var remaining = new List<Process>(processes);
 
-        var remainingProcesses = new List<Process>(processes);
-
-        while (remainingProcesses.Count > 0)
+        while (remaining.Count > 0)
         {
-            var availableProcesses = remainingProcesses
-                .Where(p => p.ArrivalTime <= currentTime)
-                .OrderBy(p => p.RemainingTime)
-                .ThenBy(p => p.ArrivalTime)
-                .ToList();
-
-            if (availableProcesses.Count == 0)
+            var available = remaining.Where(p => p.ArrivalTime <= currentTime).OrderBy(p => p.RemainingTime).ThenBy(p => p.ArrivalTime).ToList();
+            if (available.Count == 0)
             {
-                int nextArrival = remainingProcesses.Min(p => p.ArrivalTime);
-                currentTime = nextArrival;
+                currentTime++;
                 continue;
             }
 
-            var selectedProcess = availableProcesses[0];
-
-            if (lastProcessId != selectedProcess.Id)
+            var p = available[0];
+            if (lastProcessId != p.Id)
             {
                 if (lastProcessId != -1)
                 {
                     ganttChart.Add(lastProcessId);
-                    timeSlices.Add(currentTimeSlice);
+                    timeSlices.Add(timeSlice);
                 }
-                lastProcessId = selectedProcess.Id;
-                currentTimeSlice = 1;
+                lastProcessId = p.Id;
+                timeSlice = 1;
             }
             else
+                timeSlice++;
+
+            p.RemainingTime--;
+            if (p.RemainingTime == 0)
             {
-                currentTimeSlice++;
+                p.CompletionTime = currentTime + 1;
+                p.TurnaroundTime = p.CompletionTime - p.ArrivalTime;
+                p.WaitingTime = p.TurnaroundTime - p.BurstTime;
+                remaining.Remove(p);
             }
-
-            selectedProcess.RemainingTime--;
-
-            if (selectedProcess.RemainingTime == 0)
-            {
-                selectedProcess.CompletionTime = currentTime + 1;
-                selectedProcess.TurnaroundTime = selectedProcess.CompletionTime - selectedProcess.ArrivalTime;
-                selectedProcess.WaitingTime = selectedProcess.TurnaroundTime - selectedProcess.BurstTime;
-                remainingProcesses.Remove(selectedProcess);
-            }
-
             currentTime++;
         }
-
         if (lastProcessId != -1)
         {
             ganttChart.Add(lastProcessId);
-            timeSlices.Add(currentTimeSlice);
+            timeSlices.Add(timeSlice);
         }
     }
 
@@ -318,22 +291,22 @@ public class ProcessScheduler
     {
         ganttChart.Clear();
         timeSlices.Clear();
-        foreach (var process in processes)
+        foreach (var proc in processes)
         {
-            process.RemainingTime = process.BurstTime;
-            process.CompletionTime = 0;
+            proc.RemainingTime = proc.BurstTime;
+            proc.CompletionTime = 0;
         }
 
         int currentTime = 0;
-        var remainingProcesses = new List<Process>(processes);
+        var remaining = new List<Process>(processes);
         Queue<Process> queue = new Queue<Process>();
 
-        while (remainingProcesses.Any() || queue.Any())
+        while (remaining.Any() || queue.Any())
         {
-            foreach (var p in remainingProcesses.Where(p => p.ArrivalTime <= currentTime).ToList())
+            foreach (var remProc in remaining.Where(x => x.ArrivalTime <= currentTime).ToList())
             {
-                queue.Enqueue(p);
-                remainingProcesses.Remove(p);
+                queue.Enqueue(remProc);
+                remaining.Remove(remProc);
             }
 
             if (queue.Count == 0)
@@ -342,29 +315,84 @@ public class ProcessScheduler
                 continue;
             }
 
-            var currentProcess = queue.Dequeue();
-            int executionTime = Math.Min(quantum, currentProcess.RemainingTime);
-            ganttChart.Add(currentProcess.Id);
-            timeSlices.Add(executionTime);
+            var currentProc = queue.Dequeue();
+            int execTime = Math.Min(quantum, currentProc.RemainingTime);
+            ganttChart.Add(currentProc.Id);
+            timeSlices.Add(execTime);
+            currentTime += execTime;
+            currentProc.RemainingTime -= execTime;
 
-            currentTime += executionTime;
-            currentProcess.RemainingTime -= executionTime;
-
-            if (currentProcess.RemainingTime == 0)
+            if (currentProc.RemainingTime == 0)
             {
-                currentProcess.CompletionTime = currentTime;
-                currentProcess.TurnaroundTime = currentProcess.CompletionTime - currentProcess.ArrivalTime;
-                currentProcess.WaitingTime = currentProcess.TurnaroundTime - currentProcess.BurstTime;
+                currentProc.CompletionTime = currentTime;
+                currentProc.TurnaroundTime = currentProc.CompletionTime - currentProc.ArrivalTime;
+                currentProc.WaitingTime = currentProc.TurnaroundTime - currentProc.BurstTime;
             }
             else
             {
-                foreach (var p in remainingProcesses.Where(p => p.ArrivalTime <= currentTime).ToList())
+                foreach (var remProc in remaining.Where(x => x.ArrivalTime <= currentTime).ToList())
                 {
-                    queue.Enqueue(p);
-                    remainingProcesses.Remove(p);
+                    queue.Enqueue(remProc);
+                    remaining.Remove(remProc);
                 }
-                queue.Enqueue(currentProcess);
+                queue.Enqueue(currentProc);
             }
+        }
+    }
+
+
+    public void PriorityPreemptive()
+    {
+        ganttChart.Clear();
+        timeSlices.Clear();
+        foreach (var p in processes)
+        {
+            p.RemainingTime = p.BurstTime;
+            p.CompletionTime = 0;
+        }
+
+        int currentTime = 0;
+        int lastProcessId = -1;
+        int timeSlice = 0;
+        var remaining = new List<Process>(processes);
+
+        while (remaining.Count > 0)
+        {
+            var available = remaining.Where(p => p.ArrivalTime <= currentTime).OrderBy(p => p.Priority).ThenBy(p => p.ArrivalTime).ToList();
+            if (available.Count == 0)
+            {
+                currentTime++;
+                continue;
+            }
+
+            var p = available[0];
+            if (lastProcessId != p.Id)
+            {
+                if (lastProcessId != -1)
+                {
+                    ganttChart.Add(lastProcessId);
+                    timeSlices.Add(timeSlice);
+                }
+                lastProcessId = p.Id;
+                timeSlice = 1;
+            }
+            else
+                timeSlice++;
+
+            p.RemainingTime--;
+            if (p.RemainingTime == 0)
+            {
+                p.CompletionTime = currentTime + 1;
+                p.TurnaroundTime = p.CompletionTime - p.ArrivalTime;
+                p.WaitingTime = p.TurnaroundTime - p.BurstTime;
+                remaining.Remove(p);
+            }
+            currentTime++;
+        }
+        if (lastProcessId != -1)
+        {
+            ganttChart.Add(lastProcessId);
+            timeSlices.Add(timeSlice);
         }
     }
 
@@ -392,26 +420,20 @@ public class DisplayManager
         Console.WriteLine("+-------------+--------------+------------+----------+");
         Console.WriteLine("| Process No  | Arrival Time | Burst Time | Priority |");
         Console.WriteLine("+-------------+--------------+------------+----------+");
-        foreach (var process in processes)
+        foreach (var p in processes)
         {
-            Console.WriteLine($"| P{process.Id}          | {process.ArrivalTime,12} | {process.BurstTime,10} | {process.Priority,8} |");
+            Console.WriteLine($"| P{p.Id}          | {p.ArrivalTime,12} | {p.BurstTime,10} | {p.Priority,8} |");
         }
         Console.WriteLine("+-------------+--------------+------------+----------+");
     }
 
     public void ShowGanttChart(List<int> ganttChart, List<Process> processes, List<int> timeSlices)
     {
-        if (ganttChart.Count == 0)
-        {
-            Console.WriteLine("\nNo processes scheduled.");
-            return;
-        }
-
         Console.WriteLine("\nGantt Chart");
         Console.Write("|");
-        foreach (var processId in ganttChart)
+        foreach (var id in ganttChart)
         {
-            Console.Write($" P{processId} |");
+            Console.Write($" P{id} |");
         }
         Console.WriteLine("\n" + new string('-', ganttChart.Count * 5 + 1));
 
@@ -429,14 +451,13 @@ public class DisplayManager
     public void ShowTimes(List<Process> processes)
     {
         Console.WriteLine("\nTurnaround Time & Waiting Time:");
-        foreach (var process in processes)
+        foreach (var p in processes)
         {
-            Console.WriteLine($"P{process.Id}: TurnAround Time = {process.TurnaroundTime}, Waiting Time = {process.WaitingTime}");
+            Console.WriteLine($"P{p.Id}: TurnAround Time = {p.TurnaroundTime}, Waiting Time = {p.WaitingTime}");
         }
-        double avgTurnaround = processes.Average(p => p.TurnaroundTime);
-        double avgWaiting = processes.Average(p => p.WaitingTime);
-        Console.WriteLine($"\nAverage Turnaround Time: {avgTurnaround:F2}");
-        Console.WriteLine($"Average Waiting Time: {avgWaiting:F2}");
-
+        double avgTAT = processes.Average(p => p.TurnaroundTime);
+        double avgWT = processes.Average(p => p.WaitingTime);
+        Console.WriteLine($"\nAverage Turnaround Time: {avgTAT:F2}");
+        Console.WriteLine($"Average Waiting Time: {avgWT:F2}");
     }
 }
